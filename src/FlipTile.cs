@@ -10,4 +10,11 @@ public partial class FlipTile : PanelContainer {
     [Export] public Label label1;
     [Export] public Label label2;
     [Export] public Label label3;
+
+    public void Reset() {
+        label0.Visible = true;
+        label1.Visible = true;
+        label2.Visible = true;
+        label3.Visible = true;
+    }
 }

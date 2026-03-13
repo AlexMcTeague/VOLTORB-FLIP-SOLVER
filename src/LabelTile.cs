@@ -8,4 +8,9 @@ public partial class LabelTile : PanelContainer {
 
     [Export] public OptionButton rowMultDropdown;
     [Export] public OptionButton bombDropdown;
+
+    public void Reset() {
+        rowMultDropdown.Selected = 0;
+        bombDropdown.Selected = 0;
+    }
 }

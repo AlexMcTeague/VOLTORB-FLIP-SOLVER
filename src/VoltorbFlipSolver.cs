@@ -33,4 +33,13 @@ public partial class VoltorbFlipSolver : Node2D {
             labelTiles.Add(labelTile);
         }
     }
+
+    public void Reset() {
+        foreach (var flipTile in flipTiles) {
+            flipTile.Reset();
+        }
+        foreach (var labelTile in labelTiles) {
+            labelTile.Reset();
+        }
+    }
 }

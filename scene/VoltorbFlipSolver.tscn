@@ -127,3 +127,5 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 size_flags_stretch_ratio = 5.0
 columns = 6
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/ResetButton" to="." method="Reset"]
