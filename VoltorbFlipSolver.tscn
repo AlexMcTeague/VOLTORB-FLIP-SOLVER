@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw51p0wuh1lsm"]
+
+[ext_resource type="Script" uid="uid://cefywyxkx1oyt" path="res://VoltorbFlipSolver.cs" id="1_50hem"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yabb"]
+bg_color = Color(0, 0.50980395, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50hem"]
+bg_color = Color(0.50980395, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="VoltorbFlipSolver" type="Node2D" unique_id=749601319 node_paths=PackedStringArray("board")]
+script = ExtResource("1_50hem")
+board = NodePath("PanelContainer/HBoxContainer/Board")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1365323000]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=162235401]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=406981005]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="SolveButton" type="Button" parent="PanelContainer/HBoxContainer/Controls" unique_id=1102093357]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_3yabb")
+text = "Solve"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/Controls" unique_id=634264786]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="PanelContainer/HBoxContainer/Controls" unique_id=412882866]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_50hem")
+text = "Reset"
+
+[node name="Board" type="GridContainer" parent="PanelContainer/HBoxContainer" unique_id=2008000059]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+columns = 5
