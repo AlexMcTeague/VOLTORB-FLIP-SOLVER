@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw51p0wuh1lsm"]
 
-[ext_resource type="Script" uid="uid://cefywyxkx1oyt" path="res://VoltorbFlipSolver.cs" id="1_50hem"]
+[ext_resource type="Script" uid="uid://cefywyxkx1oyt" path="res://src/VoltorbFlipSolver.cs" id="1_xxct4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yabb"]
 bg_color = Color(0, 0.50980395, 0, 1)
@@ -17,7 +17,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="VoltorbFlipSolver" type="Node2D" unique_id=749601319 node_paths=PackedStringArray("board")]
-script = ExtResource("1_50hem")
+script = ExtResource("1_xxct4")
 board = NodePath("PanelContainer/HBoxContainer/Board")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1365323000]

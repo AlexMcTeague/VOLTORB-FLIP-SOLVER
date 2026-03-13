@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://u0ynjj401e03"]
+
+[ext_resource type="Script" uid="uid://bohm7q35mohsk" path="res://src/LabelTile.cs" id="1_n4ccx"]
+
+[node name="LabelTile" type="PanelContainer" unique_id=526003575 node_paths=PackedStringArray("rowMultDropdown", "bombDropdown")]
+custom_minimum_size = Vector2(100, 100)
+script = ExtResource("1_n4ccx")
+rowMultDropdown = NodePath("MarginContainer/HBoxContainer/RowMultDropdown")
+bombDropdown = NodePath("MarginContainer/HBoxContainer/HBoxContainer/BombDropdown")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=808950639]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=119706909]
+layout_mode = 2
+
+[node name="RowMultDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer" unique_id=1695089615]
+layout_mode = 2
+item_count = 16
+popup/item_0/text = "00"
+popup/item_0/id = 0
+popup/item_1/text = "01"
+popup/item_1/id = 1
+popup/item_2/text = "02"
+popup/item_2/id = 2
+popup/item_3/text = "03"
+popup/item_3/id = 3
+popup/item_4/text = "04"
+popup/item_4/id = 4
+popup/item_5/text = "05"
+popup/item_5/id = 5
+popup/item_6/text = "06"
+popup/item_6/id = 6
+popup/item_7/text = "07"
+popup/item_7/id = 7
+popup/item_8/text = "08"
+popup/item_8/id = 8
+popup/item_9/text = "09"
+popup/item_9/id = 9
+popup/item_10/text = "10"
+popup/item_10/id = 10
+popup/item_11/text = "11"
+popup/item_11/id = 11
+popup/item_12/text = "12"
+popup/item_12/id = 12
+popup/item_13/text = "13"
+popup/item_13/id = 13
+popup/item_14/text = "14"
+popup/item_14/id = 14
+popup/item_15/text = "15"
+popup/item_15/id = 15
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer" unique_id=996531874]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1174334822]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=244045405]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Ɵ"
+
+[node name="BombDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1682056584]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+item_count = 6
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "5"
+popup/item_5/id = 5
