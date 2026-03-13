@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdncjpggio1de"]
+[gd_scene load_steps=3 format=3 uid="uid://cdncjpggio1de"]
 
 [ext_resource type="Script" uid="uid://cohvnewv8ga8o" path="res://src/FlipTile.cs" id="1_rxciu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxciu"]
+bg_color = Color(0.5372549, 0.22745098, 0.22745098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="FlipTile" type="PanelContainer" unique_id=329025499 node_paths=PackedStringArray("label0", "label1", "label2", "label3")]
 custom_minimum_size = Vector2(100, 100)
@@ -8,6 +20,7 @@ offset_right = 100.0
 offset_bottom = 100.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_rxciu")
 script = ExtResource("1_rxciu")
 label0 = NodePath("MarginContainer/Label0")
 label1 = NodePath("MarginContainer/Label1")
@@ -26,6 +39,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "0"
 
@@ -33,6 +47,7 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "1"
 
@@ -40,6 +55,7 @@ text = "1"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "2"
 
@@ -47,5 +63,6 @@ text = "2"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "3"

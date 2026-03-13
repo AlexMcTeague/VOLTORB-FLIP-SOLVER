@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://u0ynjj401e03"]
+[gd_scene load_steps=4 format=3 uid="uid://u0ynjj401e03"]
 
 [ext_resource type="Script" uid="uid://bohm7q35mohsk" path="res://src/LabelTile.cs" id="1_n4ccx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ccx"]
+bg_color = Color(0.75686276, 0.3882353, 0.7921569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_n4ccx"]
 
 [node name="LabelTile" type="PanelContainer" unique_id=526003575 node_paths=PackedStringArray("rowMultDropdown", "bombDropdown")]
 custom_minimum_size = Vector2(100, 100)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_n4ccx")
 script = ExtResource("1_n4ccx")
 rowMultDropdown = NodePath("MarginContainer/HBoxContainer/RowMultDropdown")
 bombDropdown = NodePath("MarginContainer/HBoxContainer/HBoxContainer/BombDropdown")
@@ -22,6 +37,8 @@ layout_mode = 2
 
 [node name="RowMultDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer" unique_id=1695089615]
 layout_mode = 2
+alignment = 2
+selected = 0
 item_count = 16
 popup/item_0/text = "00"
 popup/item_0/id = 0
@@ -58,6 +75,7 @@ popup/item_15/id = 15
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer" unique_id=996531874]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_n4ccx")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1174334822]
 layout_mode = 2
@@ -65,13 +83,15 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=244045405]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Ɵ"
+theme_override_font_sizes/font_size = 32
+text = "◓"
 
 [node name="BombDropdown" type="OptionButton" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1682056584]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
+selected = 0
 item_count = 6
 popup/item_0/text = "0"
 popup/item_0/id = 0

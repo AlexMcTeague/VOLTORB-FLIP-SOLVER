@@ -1,9 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw51p0wuh1lsm"]
+[gd_scene load_steps=8 format=3 uid="uid://bw51p0wuh1lsm"]
 
 [ext_resource type="Script" uid="uid://cefywyxkx1oyt" path="res://src/VoltorbFlipSolver.cs" id="1_xxct4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi6jy"]
+bg_color = Color(0.24313726, 0.6117647, 0.20784314, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xxct4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxct4"]
+bg_color = Color(0, 0.50980395, 0.67058825, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yabb"]
-bg_color = Color(0, 0.50980395, 0, 1)
+bg_color = Color(0.03137255, 0.30980393, 0.03529412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -11,48 +31,99 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50hem"]
 bg_color = Color(0.50980395, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fi6jy"]
+vertical = true
+
 [node name="VoltorbFlipSolver" type="Node2D" unique_id=749601319 node_paths=PackedStringArray("board")]
 script = ExtResource("1_xxct4")
-board = NodePath("PanelContainer/HBoxContainer/Board")
+board = NodePath("PanelContainer/MarginContainer/HBoxContainer/Board")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1365323000]
-offset_right = 1152.0
+offset_right = 860.0
 offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi6jy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=162235401]
-layout_mode = 2
-
-[node name="Controls" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=406981005]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="SolveButton" type="Button" parent="PanelContainer/HBoxContainer/Controls" unique_id=1102093357]
-custom_minimum_size = Vector2(100, 0)
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2126839478]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_3yabb")
-text = "Solve"
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/Controls" unique_id=634264786]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=162235401]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Controls" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=406981005]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=1113678074]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+text = "Voltorb Flip
+Solver"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=881272476]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_xxct4")
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=956783506]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="ResetButton" type="Button" parent="PanelContainer/HBoxContainer/Controls" unique_id=412882866]
+[node name="RandomizeButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=704211238]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_xxct4")
+text = " Randomize "
+
+[node name="Spacer2" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=564101124]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="SolveButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=1102093357]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_3yabb")
+text = "Solve"
+
+[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=634264786]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResetButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=412882866]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_50hem")
 text = "Reset"
 
-[node name="Board" type="GridContainer" parent="PanelContainer/HBoxContainer" unique_id=2008000059]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1696891531]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_fi6jy")
+
+[node name="Board" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=2008000059]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 size_flags_stretch_ratio = 5.0
 columns = 6
