@@ -6,8 +6,8 @@
 custom_minimum_size = Vector2(100, 100)
 offset_right = 100.0
 offset_bottom = 100.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_rxciu")
 label0 = NodePath("MarginContainer/Label0")
 label1 = NodePath("MarginContainer/Label1")

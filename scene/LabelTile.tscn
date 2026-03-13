@@ -4,6 +4,8 @@
 
 [node name="LabelTile" type="PanelContainer" unique_id=526003575 node_paths=PackedStringArray("rowMultDropdown", "bombDropdown")]
 custom_minimum_size = Vector2(100, 100)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_n4ccx")
 rowMultDropdown = NodePath("MarginContainer/HBoxContainer/RowMultDropdown")
 bombDropdown = NodePath("MarginContainer/HBoxContainer/HBoxContainer/BombDropdown")
