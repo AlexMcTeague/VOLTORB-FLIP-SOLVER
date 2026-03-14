@@ -155,13 +155,24 @@ public partial class VoltorbFlipSolver : Node2D {
                     }
                 }
 
-                // Calculate the remaining multiplier total in this row, excluding solved safe tiles, and bombs
+                // If the remaining multiplier is too low for any of the unsolved safe tiles to have higher values, we can mark off those modifiers
+                if (remainingMult < unsolvedSafeTileCount + 1) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
+                        flipTile.label2.Visible = false;
+                    }
+                }
                 if (remainingMult < unsolvedSafeTileCount + 2) {
                     foreach (FlipTile flipTile in unsolvedTiles) {
                         flipTile.label3.Visible = false;
                     }
                 }
-                if (remainingMult < unsolvedSafeTileCount + 1) {
+                // If the remaining multiplier is too high for any of the unsolved safe tiles to have lower values, we can mark off those modifiers
+                if (remainingMult >= (unsolvedSafeTileCount * 3) - 1) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
+                        flipTile.label1.Visible = false;
+                    }
+                }
+                if (remainingMult == unsolvedSafeTileCount * 3) {
                     foreach (FlipTile flipTile in unsolvedTiles) {
                         flipTile.label2.Visible = false;
                     }
