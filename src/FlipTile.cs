@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 
 namespace VoltorbFlipSolver;
@@ -24,7 +25,7 @@ public partial class FlipTile : PanelContainer {
     // Whether this tile's value has been determined
     public bool IsSolved {
         get {
-            return label0.Visible ^ label1.Visible ^ label2.Visible ^ label3.Visible;
+            return (new[] { label0.Visible, label1.Visible, label2.Visible, label3.Visible }.Count(x => x) == 1);
         }
     }
 
