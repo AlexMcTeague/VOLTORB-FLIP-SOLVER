@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Voltorb Flip Solver Debugging": {
+      "commandName": "Executable",
+      "executablePath": "%GODOT4%",
+      "workingDirectory": "."
+    }
+  }
+}
