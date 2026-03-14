@@ -15,7 +15,7 @@ public partial class FlipTile : PanelContainer {
 
     public Vector2I position; // (row, column) zero-based
 
-    // Whether this tile only has one possible value remaining
+    // This tile is safe if it's not a bomb
     public bool IsSafe {
         get {
             return !label0.Visible;

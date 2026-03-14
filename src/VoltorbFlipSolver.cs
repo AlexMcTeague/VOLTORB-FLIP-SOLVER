@@ -154,15 +154,18 @@ public partial class VoltorbFlipSolver : Node2D {
                         break;
                 }
             }
+
+    public void Restart() {
+        messageLabel.Text = "";
+        foreach (FlipTile fliptile in flipTileDict.Values) {
+            fliptile.Reset();
         }
     }
 
     public void Reset() {
         messageLabel.Text = "";
-        foreach (var flipTile in flipTileDict.Values) {
-            flipTile.Reset();
-        }
-        foreach (var labelTile in labelTiles) {
+        Restart();
+        foreach (LabelTile labelTile in labelTiles) {
             labelTile.Reset();
         }
     }

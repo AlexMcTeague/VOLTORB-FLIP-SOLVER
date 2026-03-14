@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw51p0wuh1lsm"]
+[gd_scene load_steps=9 format=3 uid="uid://bw51p0wuh1lsm"]
 
 [ext_resource type="Script" uid="uid://cefywyxkx1oyt" path="res://src/VoltorbFlipSolver.cs" id="1_xxct4"]
 
@@ -9,6 +9,17 @@ bg_color = Color(0.24313726, 0.6117647, 0.20784314, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxct4"]
 bg_color = Color(0, 0.50980395, 0.67058825, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mraj5"]
+bg_color = Color(0.7921569, 0.30980393, 0.03529412, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -51,6 +62,7 @@ messageLabel = NodePath("PanelContainer/MarginContainer/HBoxContainer/Controls/M
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1365323000]
 offset_right = 860.0
 offset_bottom = 648.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fi6jy")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2126839478]
@@ -97,6 +109,18 @@ text = " Randomize "
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
+[node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=854723269]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_mraj5")
+text = "Restart"
+
+[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=138028549]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="SolveButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=1102093357]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -105,7 +129,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_3yabb")
 text = "Solve"
 
-[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=138028549]
+[node name="Spacer4" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=1241317618]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
@@ -113,7 +137,7 @@ layout_mode = 2
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="Spacer4" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=634264786]
+[node name="Spacer5" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=634264786]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
@@ -138,5 +162,6 @@ size_flags_stretch_ratio = 5.0
 columns = 6
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/RandomizeButton" to="." method="Randomize"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/RestartButton" to="." method="Restart"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/SolveButton" to="." method="Solve"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/ResetButton" to="." method="Reset"]
