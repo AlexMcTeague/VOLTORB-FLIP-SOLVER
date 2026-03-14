@@ -9,6 +9,9 @@ public partial class LabelTile : PanelContainer {
     [Export] public OptionButton rowMultDropdown;
     [Export] public OptionButton bombDropdown;
 
+    public int labelIndex; // Zero-based index of the label (0-4)
+    public bool isRow; // True for row labels, false for column labels
+
     public void Reset() {
         rowMultDropdown.Selected = 0;
         bombDropdown.Selected = 0;

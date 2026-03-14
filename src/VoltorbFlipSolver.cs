@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Godot;
-using Godot.NativeInterop;
 
 namespace VoltorbFlipSolver;
 
@@ -20,16 +19,21 @@ public partial class VoltorbFlipSolver : Node2D {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 var flipTile = FlipTile.PairedScene.Instantiate<FlipTile>();
+                flipTile.position = new Vector2I(i, j);
                 board.AddChild(flipTile);
                 flipTiles.Add(flipTile);
             }
             var labelTile = LabelTile.PairedScene.Instantiate<LabelTile>();
+            labelTile.labelIndex = i;
+            labelTile.isRow = true;
             board.AddChild(labelTile);
             labelTiles.Add(labelTile);
         }
 
         for (int i = 0; i < 5; i++) {
             var labelTile = LabelTile.PairedScene.Instantiate<LabelTile>();
+            labelTile.labelIndex = i;
+            labelTile.isRow = false;
             board.AddChild(labelTile);
             labelTiles.Add(labelTile);
         }

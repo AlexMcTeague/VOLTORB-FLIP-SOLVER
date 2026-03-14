@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace VoltorbFlipSolver;
@@ -10,6 +11,8 @@ public partial class FlipTile : PanelContainer {
     [Export] public Label label1;
     [Export] public Label label2;
     [Export] public Label label3;
+
+    public Vector2I position; // (row, column) zero-based
 
     public void Reset() {
         label0.Visible = true;
