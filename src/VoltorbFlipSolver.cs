@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.NativeInterop;
 
 namespace VoltorbFlipSolver;
 
@@ -31,6 +32,35 @@ public partial class VoltorbFlipSolver : Node2D {
             var labelTile = LabelTile.PairedScene.Instantiate<LabelTile>();
             board.AddChild(labelTile);
             labelTiles.Add(labelTile);
+        }
+    }
+
+    public void Randomize() {
+        var rand = new RandomNumberGenerator();
+        rand.Randomize();
+
+        foreach (var labelTile in labelTiles) {
+            int bombCount = rand.RandiRange(0, 5);
+            int multCount = 5 - bombCount;
+            int multTotal = 0;
+
+            for (int i = 1; i <= multCount; i++) {
+                float randomFloat = rand.Randf();
+                switch (randomFloat) {
+                    case < 0.55f:
+                        multTotal += 1;
+                        break;
+                    case < 0.85f:
+                        multTotal += 2;
+                        break;
+                    default:
+                        multTotal += 3;
+                        break;
+                }
+            }
+                
+            labelTile.rowMultDropdown.Selected = multTotal;
+            labelTile.bombDropdown.Selected = bombCount;
         }
     }
 
