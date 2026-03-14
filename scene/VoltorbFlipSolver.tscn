@@ -43,9 +43,10 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_fi6jy"]
 vertical = true
 
-[node name="VoltorbFlipSolver" type="Node2D" unique_id=749601319 node_paths=PackedStringArray("board")]
+[node name="VoltorbFlipSolver" type="Node2D" unique_id=749601319 node_paths=PackedStringArray("board", "messageLabel")]
 script = ExtResource("1_xxct4")
 board = NodePath("PanelContainer/MarginContainer/HBoxContainer/Board")
+messageLabel = NodePath("PanelContainer/MarginContainer/HBoxContainer/Controls/Message")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1365323000]
 offset_right = 860.0
@@ -104,7 +105,15 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_3yabb")
 text = "Solve"
 
-[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=634264786]
+[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=138028549]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Message" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=238152398]
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Spacer4" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/Controls" unique_id=634264786]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
@@ -129,4 +138,5 @@ size_flags_stretch_ratio = 5.0
 columns = 6
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/RandomizeButton" to="." method="Randomize"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/SolveButton" to="." method="Solve"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/Controls/ResetButton" to="." method="Reset"]

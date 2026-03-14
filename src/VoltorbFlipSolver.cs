@@ -6,9 +6,22 @@ namespace VoltorbFlipSolver;
 [Tool]
 public partial class VoltorbFlipSolver : Node2D {
 	[Export] public GridContainer board;
+    [Export] public Label messageLabel;
 
-	public List<FlipTile> flipTiles = new List<FlipTile>();
+    public Dictionary<Vector2I, FlipTile> flipTileDict = new Dictionary<Vector2I, FlipTile>();
     public List<LabelTile> labelTiles = new List<LabelTile>();
+
+    public int SafeTileCount {
+        get {
+            int count = 0;
+            foreach (var flipTile in flipTileDict.Values) {
+                if (flipTile.IsSafe) {
+                    count++;
+                }
+            }
+            return count;
+        }
+    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
@@ -21,11 +34,12 @@ public partial class VoltorbFlipSolver : Node2D {
                 var flipTile = FlipTile.PairedScene.Instantiate<FlipTile>();
                 flipTile.position = new Vector2I(i, j);
                 board.AddChild(flipTile);
-                flipTiles.Add(flipTile);
+                flipTileDict.Add(flipTile.position, flipTile);
             }
             var labelTile = LabelTile.PairedScene.Instantiate<LabelTile>();
             labelTile.labelIndex = i;
             labelTile.isRow = true;
+            AssociateTiles(labelTile);
             board.AddChild(labelTile);
             labelTiles.Add(labelTile);
         }
@@ -34,12 +48,24 @@ public partial class VoltorbFlipSolver : Node2D {
             var labelTile = LabelTile.PairedScene.Instantiate<LabelTile>();
             labelTile.labelIndex = i;
             labelTile.isRow = false;
+            AssociateTiles(labelTile);
             board.AddChild(labelTile);
             labelTiles.Add(labelTile);
         }
     }
 
+    public void AssociateTiles(LabelTile labelTile) {
+        for (int i = 0; i < 5; i++) {
+            if (labelTile.isRow) {
+                labelTile.flipTiles.Add(flipTileDict[new Vector2I(labelTile.labelIndex, i)]);
+            } else {
+                labelTile.flipTiles.Add(flipTileDict[new Vector2I(i, labelTile.labelIndex)]);
+            }
+        }
+    }
+
     public void Randomize() {
+        messageLabel.Text = "";
         var rand = new RandomNumberGenerator();
         rand.Randomize();
 
@@ -68,8 +94,72 @@ public partial class VoltorbFlipSolver : Node2D {
         }
     }
 
+    public void Solve() {
+        messageLabel.Text = "";
+        int prevSafeTiles = -1;
+
+        while (SafeTileCount != prevSafeTiles) {
+            prevSafeTiles = SafeTileCount;
+
+            foreach (LabelTile labelTile in labelTiles) {
+                if (labelTile.rowMultDropdown.Selected > ((5 - labelTile.bombDropdown.Selected) * 3)
+                    || (labelTile.rowMultDropdown.Selected + labelTile.bombDropdown.Selected) < 5
+                ) {
+                    string rowOrCol = labelTile.isRow ? "Row " : "Column ";
+                    messageLabel.Text = "Error: Impossible multiplier/bomb combination on " + rowOrCol + " " + (labelTile.labelIndex + 1);
+                    return;
+                }
+
+                switch (labelTile.bombDropdown.Selected) {
+                    case 0:
+                        foreach (FlipTile flipTile in labelTile.flipTiles) {
+                            flipTile.label0.Visible = false;
+                        }
+                        break;
+                    case 5:
+                        foreach (FlipTile flipTile in labelTile.flipTiles) {
+                            flipTile.SetValue(0);
+                        }
+                        break;
+                    default:
+                        int bombCount = 0;
+                        int remainingMult = labelTile.rowMultDropdown.Selected;
+                        List<FlipTile> unsolvedTiles = new List<FlipTile>();
+
+                        foreach (FlipTile flipTile in labelTile.flipTiles) {
+                            if (flipTile.IsSolved) {
+                                if (flipTile.IsSafe) {
+                                    remainingMult -= flipTile.GetMult();
+                                } else {
+                                    bombCount++;
+                                }
+                            } else {
+                                unsolvedTiles.Add(flipTile);
+                            }
+                        }
+
+                        if (bombCount == labelTile.bombDropdown.Selected) {
+                            foreach (FlipTile flipTile in labelTile.flipTiles) {
+                                if (!flipTile.IsSolved) {
+                                    flipTile.label0.Visible = false;
+                                }
+                            }
+                        }
+                        if (remainingMult == unsolvedTiles.Count) {
+                            foreach (FlipTile flipTile in unsolvedTiles) {
+                                flipTile.SetValue(1);
+                            }
+                        }
+                        
+                        break;
+                }
+            }
+        }
+    }
+
     public void Reset() {
-        foreach (var flipTile in flipTiles) {
+        messageLabel.Text = "";
+        foreach (var flipTile in flipTileDict.Values) {
             flipTile.Reset();
         }
         foreach (var labelTile in labelTiles) {

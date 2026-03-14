@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace VoltorbFlipSolver;
@@ -11,6 +12,8 @@ public partial class LabelTile : PanelContainer {
 
     public int labelIndex; // Zero-based index of the label (0-4)
     public bool isRow; // True for row labels, false for column labels
+
+    public List<FlipTile> flipTiles = new List<FlipTile>();
 
     public void Reset() {
         rowMultDropdown.Selected = 0;
