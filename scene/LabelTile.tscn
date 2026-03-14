@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bohm7q35mohsk" path="res://src/LabelTile.cs" id="1_n4ccx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ccx"]
-bg_color = Color(0.75686276, 0.3882353, 0.7921569, 1)
+bg_color = Color(0.85326415, 0.57463837, 0.8772924, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -83,6 +83,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=244045405]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "◓"
 
