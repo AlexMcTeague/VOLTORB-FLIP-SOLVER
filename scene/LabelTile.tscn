@@ -20,6 +20,7 @@ corner_radius_bottom_left = 8
 custom_minimum_size = Vector2(100, 100)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n4ccx")
 script = ExtResource("1_n4ccx")
 rowMultDropdown = NodePath("MarginContainer/HBoxContainer/RowMultDropdown")

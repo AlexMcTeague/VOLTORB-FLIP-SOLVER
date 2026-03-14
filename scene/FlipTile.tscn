@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdncjpggio1de"]
+[gd_scene load_steps=4 format=3 uid="uid://cdncjpggio1de"]
 
 [ext_resource type="Script" uid="uid://cohvnewv8ga8o" path="res://src/FlipTile.cs" id="1_rxciu"]
 
@@ -14,18 +14,49 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="FlipTile" type="PanelContainer" unique_id=329025499 node_paths=PackedStringArray("label0", "label1", "label2", "label3")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxciu"]
+size = Vector2(50, 50)
+
+[node name="FlipTile" type="PanelContainer" unique_id=329025499 node_paths=PackedStringArray("label0", "label1", "label2", "label3", "clickZone1", "clickZone2", "clickZone3")]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 100.0
 offset_bottom = 100.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rxciu")
 script = ExtResource("1_rxciu")
 label0 = NodePath("MarginContainer/Label0")
 label1 = NodePath("MarginContainer/Label1")
 label2 = NodePath("MarginContainer/Label2")
 label3 = NodePath("MarginContainer/Label3")
+clickZone1 = NodePath("GridContainer/ClickZone1")
+clickZone2 = NodePath("GridContainer/ClickZone2")
+clickZone3 = NodePath("GridContainer/ClickZone3")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1646045226]
+layout_mode = 2
+
+[node name="ClickZone1" type="Area2D" parent="GridContainer" unique_id=1170995417]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridContainer/ClickZone1" unique_id=256552184]
+position = Vector2(73, 23)
+shape = SubResource("RectangleShape2D_rxciu")
+
+[node name="ClickZone2" type="Area2D" parent="GridContainer" unique_id=198083903]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridContainer/ClickZone2" unique_id=375688933]
+position = Vector2(23, 73)
+shape = SubResource("RectangleShape2D_rxciu")
+
+[node name="ClickZone3" type="Area2D" parent="GridContainer" unique_id=1711786398]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridContainer/ClickZone3" unique_id=447509912]
+position = Vector2(73, 73)
+shape = SubResource("RectangleShape2D_rxciu")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=561514898]
 layout_mode = 2
@@ -66,3 +97,7 @@ size_flags_vertical = 8
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "3"
+
+[connection signal="input_event" from="GridContainer/ClickZone1" to="." method="Click" binds= [1]]
+[connection signal="input_event" from="GridContainer/ClickZone2" to="." method="Click" binds= [2]]
+[connection signal="input_event" from="GridContainer/ClickZone3" to="." method="Click" binds= [3]]

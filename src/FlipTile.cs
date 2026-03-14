@@ -13,6 +13,10 @@ public partial class FlipTile : PanelContainer {
     [Export] public Label label2;
     [Export] public Label label3;
 
+    [Export] Area2D clickZone1;
+    [Export] Area2D clickZone2;
+    [Export] Area2D clickZone3;
+
     public Vector2I position; // (row, column) zero-based
 
     // This tile is safe if it's not a bomb
@@ -78,10 +82,49 @@ public partial class FlipTile : PanelContainer {
         }
     }
 
+    public void Click(Node n, InputEvent e, int shape, int value) {
+        if (e is InputEventMouseButton mouseButton && mouseButton.IsPressed() && mouseButton.ButtonIndex == MouseButton.Left) {
+            SetValue(value);
+            Refresh();
+        }
+    }
+
+    public void Refresh() {
+        label1.RemoveThemeColorOverride("font_color");
+        label2.RemoveThemeColorOverride("font_color");
+        label3.RemoveThemeColorOverride("font_color");
+        clickZone1.Visible = false;
+        clickZone2.Visible = false;
+        clickZone3.Visible = false;
+
+        if (IsSolved) {
+            if (label1.Visible == true) {
+                label1.AddThemeColorOverride("font_color", new Color(0, 0.5f, 0));
+            } else if (label2.Visible == true) {
+                label2.AddThemeColorOverride("font_color", new Color(0, 0.5f, 0));
+            } else if (label3.Visible == true) {
+                label3.AddThemeColorOverride("font_color", new Color(0, 0.5f, 0));
+            }
+        } else {
+            if (IsSafe) {
+                if (label1.Visible) {
+                    clickZone1.Visible = true;
+                }
+                if (label2.Visible) {
+                    clickZone2.Visible = true;
+                }
+                if (label3.Visible) {
+                    clickZone3.Visible = true;
+                }
+            }
+        }
+    }
+
     public void Reset() {
         label0.Visible = true;
         label1.Visible = true;
         label2.Visible = true;
         label3.Visible = true;
+        Refresh();
     }
 }

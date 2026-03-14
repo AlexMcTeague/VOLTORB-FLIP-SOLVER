@@ -118,22 +118,22 @@ public partial class VoltorbFlipSolver : Node2D {
                 int unsolvedSafeTileCount = 5 - labelTile.bombDropdown.Selected;
                 int remainingMult = labelTile.rowMultDropdown.Selected;
 
-                        foreach (FlipTile flipTile in labelTile.flipTiles) {
+                foreach (FlipTile flipTile in labelTile.flipTiles) {
                     if (!flipTile.IsSafe) {
                         possibleBombs.Add(flipTile);
-                        }
+                    }
 
-                            if (flipTile.IsSolved) {
-                                if (flipTile.IsSafe) {
-                                    remainingMult -= flipTile.GetMult();
+                    if (flipTile.IsSolved) {
+                        if (flipTile.IsSafe) {
+                            remainingMult -= flipTile.GetMult();
                             unsolvedSafeTileCount--;
-                                } else {
+                        } else {
                             confirmedBombsCount++;
-                                }
-                            } else {
-                                unsolvedTiles.Add(flipTile);
-                            }
                         }
+                    } else {
+                        unsolvedTiles.Add(flipTile);
+                    }
+                }
 
                 // If the number of tiles where bombs are *possible* is equal to the number of expected bombs, we can confirm those tiles are in fact bombs
                 // The other tiles in that row can't be bombs
@@ -151,27 +151,29 @@ public partial class VoltorbFlipSolver : Node2D {
                 // Note: This will also mark all tiles in the row safe if the expected bomb count is 0
                 if (confirmedBombsCount == labelTile.bombDropdown.Selected) {
                     foreach (FlipTile flipTile in unsolvedTiles) {
-                                    flipTile.label0.Visible = false;
-                                }
-                            }
+                        flipTile.label0.Visible = false;
+                    }
+                }
 
                 // Calculate the remaining multiplier total in this row, excluding solved safe tiles, and bombs
                 if (remainingMult < unsolvedSafeTileCount + 2) {
                     foreach (FlipTile flipTile in unsolvedTiles) {
                         flipTile.label3.Visible = false;
-                        }
+                    }
                 }
                 if (remainingMult < unsolvedSafeTileCount + 1) {
-                            foreach (FlipTile flipTile in unsolvedTiles) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
                         flipTile.label2.Visible = false;
                     }
                 }
-                            }
-                        }
-                        
-        // After comprehensively checking for changes, now we can update the display
-                }
             }
+        }
+
+        // After comprehensively checking for changes, now we can update the display
+        foreach (FlipTile flipTile in flipTileDict.Values) {
+            flipTile.Refresh();
+        }
+    }
 
     public void Restart() {
         messageLabel.Text = "";
