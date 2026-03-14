@@ -110,48 +110,66 @@ public partial class VoltorbFlipSolver : Node2D {
                     return;
                 }
 
-                switch (labelTile.bombDropdown.Selected) {
-                    case 0:
-                        foreach (FlipTile flipTile in labelTile.flipTiles) {
-                            flipTile.label0.Visible = false;
-                        }
-                        break;
-                    case 5:
-                        foreach (FlipTile flipTile in labelTile.flipTiles) {
-                            flipTile.SetValue(0);
-                        }
-                        break;
-                    default:
-                        int bombCount = 0;
-                        int remainingMult = labelTile.rowMultDropdown.Selected;
-                        List<FlipTile> unsolvedTiles = new List<FlipTile>();
+                int confirmedBombsCount = 0;
+                List<FlipTile> possibleBombs = new List<FlipTile>();
+                List<FlipTile> unsolvedTiles = new List<FlipTile>();
+                // TODO: Condense labelTile.bombDropdown.Selected into expectedBombs
+                // TODO: Replace all the "5" magic numbers with a property (or two) to define how many rows/columns are in the grid
+                int unsolvedSafeTileCount = 5 - labelTile.bombDropdown.Selected;
+                int remainingMult = labelTile.rowMultDropdown.Selected;
 
                         foreach (FlipTile flipTile in labelTile.flipTiles) {
+                    if (!flipTile.IsSafe) {
+                        possibleBombs.Add(flipTile);
+                        }
+
                             if (flipTile.IsSolved) {
                                 if (flipTile.IsSafe) {
                                     remainingMult -= flipTile.GetMult();
+                            unsolvedSafeTileCount--;
                                 } else {
-                                    bombCount++;
+                            confirmedBombsCount++;
                                 }
                             } else {
                                 unsolvedTiles.Add(flipTile);
                             }
                         }
 
-                        if (bombCount == labelTile.bombDropdown.Selected) {
-                            foreach (FlipTile flipTile in labelTile.flipTiles) {
-                                if (!flipTile.IsSolved) {
+                // If the number of tiles where bombs are *possible* is equal to the number of expected bombs, we can confirm those tiles are in fact bombs
+                // The other tiles in that row can't be bombs
+                if (possibleBombs.Count == labelTile.bombDropdown.Selected) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
+                        if (possibleBombs.Contains(flipTile)) {
+                            flipTile.SetValue(0);
+                        } else {
+                            flipTile.label0.Visible = false;
+                        }
+                    }
+                }
+
+                // If the number of confirmed bombs is equal to the number of expected bombs, any unconfirmed bombs can be marked safe
+                // Note: This will also mark all tiles in the row safe if the expected bomb count is 0
+                if (confirmedBombsCount == labelTile.bombDropdown.Selected) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
                                     flipTile.label0.Visible = false;
                                 }
                             }
+
+                // Calculate the remaining multiplier total in this row, excluding solved safe tiles, and bombs
+                if (remainingMult < unsolvedSafeTileCount + 2) {
+                    foreach (FlipTile flipTile in unsolvedTiles) {
+                        flipTile.label3.Visible = false;
                         }
-                        if (remainingMult == unsolvedTiles.Count) {
+                }
+                if (remainingMult < unsolvedSafeTileCount + 1) {
                             foreach (FlipTile flipTile in unsolvedTiles) {
-                                flipTile.SetValue(1);
+                        flipTile.label2.Visible = false;
+                    }
+                }
                             }
                         }
                         
-                        break;
+        // After comprehensively checking for changes, now we can update the display
                 }
             }
 
